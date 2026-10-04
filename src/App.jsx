@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TopicCard from './components/TopicCard';
 import { topics } from './data';
-import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X } from 'lucide-react';
+import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
@@ -109,7 +109,7 @@ function App() {
           <div className="container mx-auto max-w-4xl relative z-10">
             
             {/* Action Buttons */}
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-end items-center mb-4">
               <button 
                 onClick={toggleDarkMode}
                 className="flex items-center justify-center p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
@@ -118,13 +118,7 @@ function App() {
                 {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
               </button>
               
-              <button 
-                onClick={shareApp}
-                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
-              >
-                <Share2 size={20} />
-                <span className="font-bold">مشاركة</span>
-              </button>
+              
             </div>
 
             <motion.div 
@@ -139,9 +133,12 @@ function App() {
               <HeartPulse size={40} className="text-accent animate-pulse" />
             </motion.div>
 
-            <h2 className="text-center text-xl md:text-2xl font-bold text-yellow-300 mb-4 drop-shadow-md">
+            <h2 className="text-center text-xl md:text-2xl font-bold text-yellow-300 mb-2 drop-shadow-md">
               إعداد د. السيد أبوالسعود
             </h2>
+            <p className="text-center text-blue-100 text-lg md:text-xl font-medium mb-6">
+              (فصل طب الاسنان - مدارس التمريض)
+            </p>
 
             
           </div>
@@ -202,7 +199,26 @@ function App() {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="mt-16 text-center text-gray-500 pb-8">
+      <footer className="mt-16 text-center text-gray-500 pb-8 px-4">
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+          <button 
+            onClick={shareApp}
+            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+          >
+            <Share2 size={20} />
+            <span className="font-bold text-lg">مشاركة</span>
+          </button>
+
+          <a 
+            href="https://wa.me/201066415005?text=%D8%A3%D8%AD%D8%AF%D8%AB%D9%83%D9%85%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D9%85%D9%86%D9%87%D8%AC%20%D9%85%D8%AF%D8%B1%D8%B3%D8%A9%20%D8%A7%D9%84%D8%AA%D9%85%D8%B1%D9%8A%D8%B6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+          >
+            <MessageCircle size={20} />
+            <span className="font-bold text-lg">راسل المصمم</span>
+          </a>
+        </div>
         <p className="flex items-center justify-center gap-2 mb-2 font-medium">
           تم التصميم بحب لطلبة التمريض <HeartPulse size={16} className="text-red-500" />
         </p>
