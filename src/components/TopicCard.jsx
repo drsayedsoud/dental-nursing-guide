@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { CheckCircle2, XCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function TopicCard({ topic }) {
-  const [expanded, setExpanded] = useState(false);
+export default function TopicCard({ topic, isExpanded, onToggle }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showResult, setShowResult] = useState(false);
 
@@ -19,28 +18,28 @@ export default function TopicCard({ topic }) {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden mb-8 border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
+      className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg mb-8 border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 relative"
     >
       <div 
-        className="cursor-pointer p-6 bg-gradient-to-r from-primary/10 to-primary/5 dark:from-blue-900/30 dark:to-blue-800/20 flex justify-between items-center transition-colors duration-300"
-        onClick={() => setExpanded(!expanded)}
+        className={`cursor-pointer p-6 bg-gradient-to-r from-primary/10 to-primary/5 dark:from-blue-900/30 dark:to-blue-800/20 flex justify-between items-center transition-colors duration-300 sticky top-0 z-30 ${isExpanded ? 'rounded-t-2xl' : 'rounded-2xl'}`}
+        onClick={onToggle}
       >
         <div>
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{topic.title}</h2>
           <p className="text-primary dark:text-blue-300 font-medium mt-1" dir="ltr">{topic.subtitle}</p>
         </div>
         <div className="bg-white dark:bg-gray-700 p-2 rounded-full shadow-sm text-primary dark:text-blue-300 transition-colors">
-          {expanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+          {isExpanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
         </div>
       </div>
 
       <AnimatePresence>
-        {expanded && (
+        {isExpanded && (
           <motion.div 
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden"
+            className="overflow-hidden rounded-b-2xl"
           >
             <div className="p-6">
               <div className="flex flex-col md:flex-row gap-6 mb-8">
