@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TopicCard from './components/TopicCard';
 import { topics } from './data';
-import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X, Search } from 'lucide-react';
+import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
@@ -34,12 +34,7 @@ function App() {
     };
     window.addEventListener('beforeinstallprompt', handler);
     
-    const filteredTopics = topics.filter(topic => 
-      topic.title.includes(searchQuery) || 
-      topic.content.includes(searchQuery) ||
-      topic.subtitle.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
+    
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
@@ -54,11 +49,45 @@ function App() {
     setShowInstallBanner(false);
   };
 
+  
+  // WakeLock: Keep screen always on
+  useEffect(() => {
+    let wakeLock = null;
+    const requestWakeLock = async () => {
+      try {
+        if ('wakeLock' in navigator) {
+          wakeLock = await navigator.wakeLock.request('screen');
+          console.log('Wake Lock is active!');
+        }
+      } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+      }
+    };
+    
+    requestWakeLock();
+
+    const handleVisibilityChange = () => {
+      if (wakeLock !== null && document.visibilityState === 'visible') {
+        requestWakeLock();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (wakeLock !== null) {
+        wakeLock.release().then(() => {
+          wakeLock = null;
+        });
+      }
+    };
+  }, []);
+
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-      const [searchQuery, setSearchQuery] = useState('');
+      
   const [expandedTopicId, setExpandedTopicId] = useState(null);
 
     const shareApp = () => {
@@ -69,12 +98,7 @@ function App() {
     };
 
     
-    const filteredTopics = topics.filter(topic => 
-      topic.title.includes(searchQuery) || 
-      topic.content.includes(searchQuery) ||
-      topic.subtitle.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
+    
     return (
       <div className={`min-h-screen font-['Tajawal'] pb-12 transition-colors duration-300 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-blue-50 via-white to-blue-50 text-gray-900'}`}>
         {/* Header */}
@@ -99,7 +123,7 @@ function App() {
                 className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
               >
                 <Share2 size={20} />
-                <span className="font-bold">مشاركة عبر واتساب 👩‍⚕️</span>
+                <span className="font-bold">مشاركة</span>
               </button>
             </div>
 
@@ -119,31 +143,17 @@ function App() {
               إعداد د. السيد أبوالسعود
             </h2>
 
-            <p className="text-center text-blue-100 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
-              ملخص تفاعلي للفصل العاشر - لطلبة التمريض الأبطال 👩‍⚕️👨‍⚕️
-              <br />
-              بلهجة بسيطة وبطريقة تسهل عليك المذاكرة!
-            </p>
+            
           </div>
         </header>
 
         {/* Main Content */}
         <main className="container mx-auto max-w-4xl px-4 mt-6 relative z-20">
           
-        {/* Search Bar */}
-        <div className="relative mb-6">
-          <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-          <input 
-            type="text" 
-            placeholder="ابحث عن أي مرض أو عرض طبي..." 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl py-4 pr-12 pl-4 text-lg focus:outline-none focus:border-primary transition-colors text-gray-800 dark:text-white"
-          />
-        </div>
+        
 
           <div className="space-y-6">
-            {filteredTopics.map((topic, index) => (
+            {topics.map((topic, index) => (
               <TopicCard 
                 key={topic.id} 
                 topic={topic} 
