@@ -45,7 +45,7 @@ export const topics = [
     4. تراكم البلاك (Dental Plaque): بسبب إهمال النظافة اليومية، البلاك بيتراكم وبيركز السكريات المتخمرة، وده بيخلي البكتيريا تفرز أحماض كافية تعمل التسوس.
     
     إذن: السن (المضيف) + البكتيريا + السكريات + البلاك = تسوس!`,
-    imageUrl: "https://images.unsplash.com/photo-1598256989800-fea5ce5146c1?auto=format&fit=crop&q=80&w=800",
+    imageUrl: "/images/image_1.jpeg",
     question: {
       text: "إيه هو النوع الأهم والأشهر من البكتيريا اللي بتفرز الإنزيمات والأحماض المسببة لتسوس الأسنان؟",
       options: ["Staphylococcus aureus", "Streptococcus mutans", "Escherichia coli", "Lactobacillus"],

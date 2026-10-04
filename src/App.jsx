@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import TopicCard from './components/TopicCard';
 import { topics } from './data';
-import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -13,6 +13,9 @@ function App() {
     return false;
   });
 
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstallBanner, setShowInstallBanner] = useState(false);
+
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -22,6 +25,27 @@ function App() {
       localStorage.setItem('theme', 'light');
     }
   }, [isDarkMode]);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstallBanner(true);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      console.log('User accepted the install prompt');
+    }
+    setDeferredPrompt(null);
+    setShowInstallBanner(false);
+  };
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -109,6 +133,42 @@ function App() {
           ))}
         </div>
       </main>
+
+      {/* PWA Install Banner */}
+      <AnimatePresence>
+        {showInstallBanner && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border-2 border-primary/20 p-4 z-50 flex flex-col gap-3"
+          >
+            <div className="flex justify-between items-start">
+              <div className="flex items-center gap-3">
+                <div className="bg-primary/10 p-2 rounded-lg">
+                  <Download className="text-primary" size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-800 dark:text-white">تثبيت التطبيق</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">ثبت التطبيق للوصول إليه بدون إنترنت</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowInstallBanner(false)}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <button
+              onClick={handleInstallClick}
+              className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors shadow-md"
+            >
+              تثبيت الآن
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Footer */}
       <footer className="mt-16 text-center text-gray-500 pb-8">
