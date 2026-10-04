@@ -21,7 +21,7 @@ export default function TopicCard({ topic, isExpanded, onToggle }) {
       className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg mb-8 border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 relative"
     >
       <div 
-        className={`cursor-pointer p-6 bg-gradient-to-r from-primary/10 to-primary/5 dark:from-blue-900/30 dark:to-blue-800/20 flex justify-between items-center transition-colors duration-300 sticky top-0 z-30 ${isExpanded ? 'rounded-t-2xl' : 'rounded-2xl'}`}
+        className={`cursor-pointer p-6 bg-blue-50 dark:bg-slate-800 border-b border-blue-100 dark:border-slate-700 flex justify-between items-center transition-colors duration-300 sticky top-0 z-30 shadow-sm ${isExpanded ? 'rounded-t-2xl' : 'rounded-2xl'}`}
         onClick={onToggle}
       >
         <div>
