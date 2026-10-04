@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import TopicCard from './components/TopicCard';
+import ChapterQuestions from './components/ChapterQuestions';
 import { topics } from './data';
 import { 
   Stethoscope, HeartPulse, Share2, Moon, Sun, Download, X, 
@@ -348,6 +349,11 @@ function App() {
             ))}
           </div>
         )}
+      
+        <ChapterQuestions 
+          isExpanded={expandedTopicId === 'chapter-questions'}
+          onToggle={() => setExpandedTopicId(expandedTopicId === 'chapter-questions' ? null : 'chapter-questions')}
+        />
       </main>
 
       {/* Scroll to Top */}
@@ -521,7 +527,8 @@ function App() {
         <p className="flex items-center justify-center gap-2 mb-2 font-medium text-sm">
           تم التصميم بحب لطلبة التمريض <HeartPulse size={14} className="text-red-500" />
         </p>
-        <p className="text-xs opacity-60">Dental Care Nursing Guide © 2026</p>
+                <p className="text-xs opacity-60">Dental Care Nursing Guide © 2026</p>
+        <p className="text-[10px] opacity-50 mt-1">المصدر: كتاب الجراحة مدرسة التمريض</p>
       </footer>
 
       {/* Bottom Navigation - Mobile Only */}
