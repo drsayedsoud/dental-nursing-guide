@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TopicCard from './components/TopicCard';
+import ChapterQuestions from './components/ChapterQuestions';
+
 import { topics } from './data';
 import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -89,6 +91,7 @@ function App() {
 
       
   const [expandedTopicId, setExpandedTopicId] = useState(null);
+  const [showChapterQuestions, setShowChapterQuestions] = useState(false);
 
     const shareApp = () => {
       const text = "تطبيق أمراض الفم والأسنان - إعداد د. السيد أبوالسعود 👩‍⚕️🏥 شارك التطبيق الآن!";
@@ -160,6 +163,11 @@ function App() {
               />
             ))}
           </div>
+      
+          <ChapterQuestions 
+            isExpanded={showChapterQuestions}
+            onToggle={() => setShowChapterQuestions(!showChapterQuestions)}
+          />
       </main>
 
       {/* PWA Install Banner */}
