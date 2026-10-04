@@ -10,7 +10,7 @@ const BADGE_COLORS = [
   'bg-gradient-to-br from-amber-500 to-amber-600',
   'bg-gradient-to-br from-emerald-500 to-emerald-600',
   'bg-gradient-to-br from-purple-500 to-purple-600',
-  'bg-gradient-to-br from-orange-500 to-orange-600',
+  'bg-gradient-to-br from-amber-500 to-orange-600',
   'bg-gradient-to-br from-pink-500 to-pink-600',
   'bg-gradient-to-br from-teal-500 to-teal-600',
   'bg-gradient-to-br from-indigo-500 to-indigo-600',
@@ -24,7 +24,7 @@ const HEADER_LIGHT = [
   'bg-amber-50/80 border-amber-100',
   'bg-emerald-50/80 border-emerald-100',
   'bg-purple-50/80 border-purple-100',
-  'bg-orange-50/80 border-orange-100',
+  'bg-amber-50/80 border-orange-100',
   'bg-pink-50/80 border-pink-100',
   'bg-teal-50/80 border-teal-100',
   'bg-indigo-50/80 border-indigo-100',
@@ -38,7 +38,7 @@ const HEADER_DARK = [
   'dark:bg-amber-950/40 dark:border-amber-900',
   'dark:bg-emerald-950/40 dark:border-emerald-900',
   'dark:bg-purple-950/40 dark:border-purple-900',
-  'dark:bg-orange-950/40 dark:border-orange-900',
+  'dark:bg-orange-950/40 dark:border-amber-900',
   'dark:bg-pink-950/40 dark:border-pink-900',
   'dark:bg-teal-950/40 dark:border-teal-900',
   'dark:bg-indigo-950/40 dark:border-indigo-900',
@@ -113,11 +113,11 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
         <div className="flex items-center gap-2 flex-shrink-0">
           {/* Quiz status indicator */}
           {quizResult != null && (
-            <div className={`w-6 h-6 rounded-full flex items-center justify-center ${quizResult.isCorrect ? 'bg-green-100 dark:bg-green-900/40' : 'bg-red-100 dark:bg-red-900/40'}`}>
+            <div className={`w-6 h-6 rounded-full flex items-center justify-center ${quizResult.isCorrect ? 'bg-green-100 dark:bg-emerald-900/40' : 'bg-red-100 dark:bg-rose-900/40'}`}>
               {quizResult.isCorrect ? (
-                <CheckCircle2 size={14} className="text-green-600 dark:text-green-400" />
+                <CheckCircle2 size={14} className="text-emerald-500 dark:text-emerald-400" />
               ) : (
-                <XCircle size={14} className="text-red-500 dark:text-red-400" />
+                <XCircle size={14} className="text-rose-400 dark:text-rose-400" />
               )}
             </div>
           )}
@@ -191,9 +191,9 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
                       btnClass += "border-gray-200 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-white dark:hover:bg-gray-700 bg-white/70 dark:bg-gray-800/70 text-gray-700 dark:text-gray-200 hover:shadow-md cursor-pointer active:scale-[0.98]";
                     } else {
                       if (optionIndex === topic.question.correctAnswer) {
-                        btnClass += "border-green-500 bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-300 shadow-sm";
+                        btnClass += "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-green-300 shadow-sm";
                       } else if (optionIndex === selectedOption) {
-                        btnClass += "border-red-400 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300";
+                        btnClass += "border-rose-400 bg-rose-50 dark:bg-rose-900/30 text-red-700 dark:text-red-300";
                       } else {
                         btnClass += "border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/30 text-gray-400 dark:text-gray-500 opacity-50";
                       }
@@ -211,10 +211,10 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
                         <div className="flex items-center justify-between gap-2">
                           <span className="flex-1">{option}</span>
                           {showResult && optionIndex === topic.question.correctAnswer && (
-                            <CheckCircle2 className="text-green-500 dark:text-green-400 flex-shrink-0" size={20} />
+                            <CheckCircle2 className="text-emerald-500 dark:text-emerald-400 flex-shrink-0" size={20} />
                           )}
                           {showResult && optionIndex === selectedOption && optionIndex !== topic.question.correctAnswer && (
-                            <XCircle className="text-red-500 dark:text-red-400 flex-shrink-0" size={20} />
+                            <XCircle className="text-rose-400 dark:text-rose-400 flex-shrink-0" size={20} />
                           )}
                         </div>
                       </motion.button>
@@ -231,13 +231,13 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
                       transition={{ delay: 0.2 }}
                       className={`mt-5 p-4 rounded-xl border transition-colors duration-300 ${
                         isCorrect 
-                          ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' 
-                          : 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800'
+                          ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-700' 
+                          : 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800'
                       }`}
                     >
                       <div className="flex-1">
                         <h4 className={`font-bold mb-1.5 flex items-center gap-2 text-base ${
-                          isCorrect ? 'text-green-700 dark:text-green-400' : 'text-orange-700 dark:text-orange-400'
+                          isCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'
                         }`}>
                           {isCorrect ? (
                             <>
