@@ -83,17 +83,17 @@ export default function ChapterQuestions({ isExpanded, onToggle }) {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="w-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 p-4 rounded-lg"
+                          className="w-full bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg"
                         >
                           <div className="flex items-start gap-3 mb-2">
-                            <CheckCircle2 className="text-emerald-500 dark:text-emerald-400 mt-1 shrink-0" size={20} />
+                            <CheckCircle2 className="text-green-600 dark:text-green-400 mt-1 shrink-0" size={20} />
                             <div>
-                              <span className="font-bold text-emerald-700 dark:text-green-300 block mb-1">Answer:</span>
+                              <span className="font-bold text-green-800 dark:text-green-300 block mb-1">Answer:</span>
                               <span className="text-gray-800 dark:text-gray-200 whitespace-pre-line font-medium">{q.answer}</span>
                             </div>
                           </div>
                           
-                          <div className="mt-3 pt-3 border-t border-emerald-200/50 dark:border-emerald-700/50">
+                          <div className="mt-3 pt-3 border-t border-green-200/50 dark:border-green-800/50">
                             <span className="font-bold text-gray-700 dark:text-gray-300 text-sm block mb-1">Explanation:</span>
                             <span className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{q.explanation}</span>
                           </div>

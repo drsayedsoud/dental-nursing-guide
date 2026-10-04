@@ -305,8 +305,8 @@ function App() {
                   ? 'bg-primary text-white border-primary shadow-md'
                   : quizResults[topic.id]
                     ? quizResults[topic.id].isCorrect
-                      ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-700'
-                      : 'bg-rose-50 dark:bg-rose-900/30 text-rose-500 dark:text-rose-400 border-red-200 dark:border-rose-700'
+                      ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800'
+                      : 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800'
                     : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-primary/50 hover:text-primary dark:hover:text-blue-400'
               }`}
             >
@@ -459,12 +459,12 @@ function App() {
                   <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{totalQuestions}</div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">إجمالي</div>
                 </div>
-                <div className="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 text-center">
-                  <div className="text-lg font-bold text-emerald-500 dark:text-emerald-400">{correctCount}</div>
+                <div className="bg-green-50 dark:bg-green-900/30 rounded-xl p-3 text-center">
+                  <div className="text-lg font-bold text-green-600 dark:text-green-400">{correctCount}</div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">صحيحة</div>
                 </div>
-                <div className="bg-rose-50 dark:bg-rose-900/30 rounded-xl p-3 text-center">
-                  <div className="text-lg font-bold text-rose-500 dark:text-rose-400">{answeredCount - correctCount}</div>
+                <div className="bg-red-50 dark:bg-red-900/30 rounded-xl p-3 text-center">
+                  <div className="text-lg font-bold text-red-600 dark:text-red-400">{answeredCount - correctCount}</div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">خاطئة</div>
                 </div>
               </div>
@@ -518,14 +518,14 @@ function App() {
             href="https://wa.me/201066415005?text=%D8%A3%D8%AD%D8%AF%D8%AB%D9%83%D9%85%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D9%85%D9%86%D9%87%D8%AC%20%D9%85%D8%AF%D8%B1%D8%B3%D8%A9%20%D8%A7%D9%84%D8%AA%D9%85%D8%B1%D9%8A%D8%B6"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 text-sm font-bold"
+            className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 text-sm font-bold"
           >
             <MessageCircle size={18} />
             راسل المصمم
           </a>
         </div>
         <p className="flex items-center justify-center gap-2 mb-2 font-medium text-sm">
-          تم التصميم بحب لطلبة التمريض <HeartPulse size={14} className="text-rose-400" />
+          تم التصميم بحب لطلبة التمريض <HeartPulse size={14} className="text-red-500" />
         </p>
                 <p className="text-xs opacity-60">Dental Care Nursing Guide © 2026</p>
         <p className="text-[10px] opacity-50 mt-1">المصدر: كتاب الجراحة مدرسة التمريض</p>
