@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function TopicCard({ topic, isExpanded, onToggle }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showResult, setShowResult] = useState(false);
+  const [isImageOpen, setIsImageOpen] = useState(false);
+
 
   const handleOptionClick = (index) => {
     if (showResult) return;
@@ -54,7 +56,8 @@ export default function TopicCard({ topic, isExpanded, onToggle }) {
                     <img 
                       src={topic.imageUrl} 
                       alt={topic.subtitle}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      onClick={() => setIsImageOpen(true)}
+                      className="absolute inset-0 w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                 </div>
@@ -136,6 +139,29 @@ export default function TopicCard({ topic, isExpanded, onToggle }) {
           </motion.div>
         )}
       </AnimatePresence>
+    
+      {/* Image Modal */}
+      <AnimatePresence>
+        {isImageOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsImageOpen(false)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 cursor-pointer"
+          >
+            <motion.img 
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              src={topic.imageUrl} 
+              alt={topic.subtitle}
+              className="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </motion.div>
   );
 }

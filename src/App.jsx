@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TopicCard from './components/TopicCard';
 import { topics } from './data';
-import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X } from 'lucide-react';
+import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X } , Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
@@ -33,6 +33,13 @@ function App() {
       setShowInstallBanner(true);
     };
     window.addEventListener('beforeinstallprompt', handler);
+    
+    const filteredTopics = topics.filter(topic => 
+      topic.title.includes(searchQuery) || 
+      topic.content.includes(searchQuery) ||
+      topic.subtitle.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
@@ -51,7 +58,8 @@ function App() {
     setIsDarkMode(!isDarkMode);
   };
 
-    const [expandedTopicId, setExpandedTopicId] = useState(null);
+      const [searchQuery, setSearchQuery] = useState('');
+  const [expandedTopicId, setExpandedTopicId] = useState(null);
 
     const shareApp = () => {
       const text = "تطبيق أمراض الفم والأسنان - إعداد د. السيد أبوالسعود 👩‍⚕️🏥 شارك التطبيق الآن!";
@@ -59,6 +67,13 @@ function App() {
       const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text + '\n' + url)}`;
       window.open(whatsappUrl, '_blank');
     };
+
+    
+    const filteredTopics = topics.filter(topic => 
+      topic.title.includes(searchQuery) || 
+      topic.content.includes(searchQuery) ||
+      topic.subtitle.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
       <div className={`min-h-screen font-['Tajawal'] pb-12 transition-colors duration-300 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-blue-50 via-white to-blue-50 text-gray-900'}`}>
@@ -114,8 +129,21 @@ function App() {
 
         {/* Main Content */}
         <main className="container mx-auto max-w-4xl px-4 mt-6 relative z-20">
+          
+        {/* Search Bar */}
+        <div className="relative mb-6">
+          <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+          <input 
+            type="text" 
+            placeholder="ابحث عن أي مرض أو عرض طبي..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl py-4 pr-12 pl-4 text-lg focus:outline-none focus:border-primary transition-colors text-gray-800 dark:text-white"
+          />
+        </div>
+
           <div className="space-y-6">
-            {topics.map((topic, index) => (
+            {filteredTopics.map((topic, index) => (
               <TopicCard 
                 key={topic.id} 
                 topic={topic} 
