@@ -1,10 +1,17 @@
 import React from 'react';
 import TopicCard from './components/TopicCard';
 import { topics } from './data';
-import { Stethoscope, HeartPulse, GraduationCap } from 'lucide-react';
+import { Stethoscope, HeartPulse, GraduationCap, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 function App() {
+  const shareApp = () => {
+    const text = "تطبيق أمراض الفم والأسنان - إعداد د. السيد أبوالسعود 👩‍⚕️🏥 شارك التطبيق الآن!";
+    const url = window.location.href;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text + '\n' + url)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 font-['Tajawal'] pb-12">
       {/* Header */}
@@ -13,10 +20,22 @@ function App() {
           <Stethoscope size={300} />
         </div>
         <div className="container mx-auto max-w-4xl relative z-10">
+          
+          {/* Share Button */}
+          <div className="flex justify-end mb-4">
+            <button 
+              onClick={shareApp}
+              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+            >
+              <Share2 size={20} />
+              <span className="font-bold">مشاركة عبر واتساب 👩‍⚕️</span>
+            </button>
+          </div>
+
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-center gap-4 mb-4"
+            className="flex items-center justify-center gap-4 mb-2"
           >
             <HeartPulse size={40} className="text-accent animate-pulse" />
             <h1 className="text-4xl md:text-5xl font-extrabold text-center drop-shadow-lg">
@@ -24,6 +43,11 @@ function App() {
             </h1>
             <HeartPulse size={40} className="text-accent animate-pulse" />
           </motion.div>
+
+          <h2 className="text-center text-xl md:text-2xl font-bold text-yellow-300 mb-4 drop-shadow-md">
+            إعداد د. السيد أبوالسعود
+          </h2>
+
           <p className="text-center text-blue-100 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
             ملخص تفاعلي للفصل العاشر - لطلبة التمريض الأبطال 👩‍⚕️👨‍⚕️
             <br />
