@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TopicCard from './components/TopicCard';
 import { topics } from './data';
-import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X } , Search } from 'lucide-react';
+import { Stethoscope, HeartPulse, GraduationCap, Share2, Moon, Sun, Download, X, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
