@@ -1,7 +1,7 @@
 import React from 'react';
 import TopicCard from './components/TopicCard';
 import { topics } from './data';
-import { Stethoscope, HeartPulse, GraduationCap, Github } from 'lucide-react';
+import { Stethoscope, HeartPulse, GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 function App() {
