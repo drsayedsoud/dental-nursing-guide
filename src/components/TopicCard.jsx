@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle2, XCircle, ChevronDown, RotateCcw, BookOpen, Award, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import TextWithAudio from './TextWithAudio';
+
 
 const BADGE_COLORS = [
   'bg-gradient-to-br from-blue-500 to-blue-600',
@@ -103,7 +105,7 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
               {topic.title.replace(/^\d+\.\s*/, '')}
             </h2>
             <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400 font-medium mt-0.5 truncate" dir="ltr">
-              {topic.subtitle}
+              <TextWithAudio text={topic.subtitle} />
             </p>
           </div>
         </div>
@@ -148,14 +150,14 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
                     <h3 className="text-lg font-bold text-gray-800 dark:text-white">الشرح ببساطة</h3>
                   </div>
                   <div className="text-gray-700 dark:text-gray-200 leading-relaxed text-[15px] md:text-base whitespace-pre-line bg-gray-50 dark:bg-gray-700/30 p-4 md:p-5 rounded-xl border border-gray-100 dark:border-gray-600/50 transition-colors duration-300">
-                    {topic.content}
+                    <TextWithAudio text={topic.content} />
                   </div>
                 </div>
                 <div className="md:w-1/3">
                   <div className="rounded-xl overflow-hidden shadow-md h-48 md:h-full md:min-h-[220px] relative group">
                     <img 
                       src={topic.imageUrl} 
-                      alt={topic.subtitle}
+                      alt=<TextWithAudio text={topic.subtitle} />
                       onClick={() => setIsImageOpen(true)}
                       className="absolute inset-0 w-full h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-110"
                     />
@@ -178,7 +180,7 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
                 </div>
                 
                 <p className="text-base md:text-lg font-medium text-gray-800 dark:text-gray-100 mb-4 pr-1">
-                  {topic.question.text}
+                  <TextWithAudio text={topic.question.text} />
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -248,7 +250,7 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
                         </h4>
                         <p className="text-gray-700 dark:text-gray-200 leading-relaxed text-sm md:text-base">
                           <span className="font-bold">التفسير: </span>
-                          {topic.question.explanation}
+                          <TextWithAudio text={topic.question.explanation} />
                         </p>
                       </div>
                       <div className="mt-3 flex justify-end">
@@ -285,7 +287,7 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
               exit={{ scale: 0.85, opacity: 0 }}
               transition={{ type: "spring", damping: 25 }}
               src={topic.imageUrl} 
-              alt={topic.subtitle}
+              alt=<TextWithAudio text={topic.subtitle} />
               className="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain"
             />
           </motion.div>

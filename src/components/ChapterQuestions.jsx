@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { chapterQuestions } from '../questionsData';
+import { playAudio } from './TextWithAudio';
+
 
 export default function ChapterQuestions({ isExpanded, onToggle }) {
   const [revealedAnswers, setRevealedAnswers] = useState({});
