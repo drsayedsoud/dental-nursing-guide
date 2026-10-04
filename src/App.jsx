@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import TopicCard from './components/TopicCard';
 import ChapterQuestions from './components/ChapterQuestions';
+import FlashcardsMode from './components/FlashcardsMode';
 import { topics } from './data';
 import { 
-  Stethoscope, HeartPulse, Share2, Moon, Sun, Download, X, 
+  Stethoscope, HeartPulse, Share2, Moon, Sun, Download, X, Layers, 
   MessageCircle, Search, ArrowUp, Trophy, Home, BarChart3
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -24,6 +25,7 @@ function App() {
 
   // UI State
   const [expandedTopicId, setExpandedTopicId] = useState(null);
+  const [showFlashcards, setShowFlashcards] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -371,6 +373,11 @@ function App() {
         )}
       </AnimatePresence>
 
+      
+      <AnimatePresence>
+        {showFlashcards && <FlashcardsMode onClose={() => setShowFlashcards(false)} />}
+      </AnimatePresence>
+
       {/* PWA Install Banner */}
       <AnimatePresence>
         {showInstallBanner && (
@@ -548,6 +555,14 @@ function App() {
             <Search size={20} />
             <span className="text-[10px] font-medium">بحث</span>
           </button>
+          <button 
+            onClick={() => setShowFlashcards(true)}
+            className="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-blue-400 transition-colors"
+          >
+            <Layers size={20} />
+            <span className="text-[10px] font-medium">كروت</span>
+          </button>
+
           <button 
             onClick={() => setShowStatsModal(true)}
             className="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-blue-400 transition-colors"
