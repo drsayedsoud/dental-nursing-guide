@@ -51,7 +51,7 @@ export default function TopicCard({ topic, index, isExpanded, onToggle, onQuizCo
   const [showResult, setShowResult] = useState(quizResult != null);
   const [isImageOpen, setIsImageOpen] = useState(false);
 
-  const colorIndex = index % BADGE_COLORS.length;
+  const colorIndex = 9; // Hardcoded to card 10's color (cyan)
   const badgeColor = BADGE_COLORS[colorIndex];
   const headerLight = HEADER_LIGHT[colorIndex];
   const headerDark = HEADER_DARK[colorIndex];
