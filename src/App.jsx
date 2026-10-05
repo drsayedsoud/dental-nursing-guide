@@ -289,36 +289,7 @@ function App() {
         </div>
       </header>
 
-      {/* Quick Navigation Chips */}
-      <div className="container mx-auto max-w-4xl px-4 mt-4 mb-2">
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          {topics.map((topic) => (
-            <button
-              key={topic.id}
-              onClick={() => {
-                setExpandedTopicId(topic.id);
-                setTimeout(() => {
-                  const el = document.getElementById(`topic-${topic.id}`);
-                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-              }}
-              className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${
-                expandedTopicId === topic.id
-                  ? 'bg-primary text-white border-primary shadow-md'
-                  : quizResults[topic.id]
-                    ? quizResults[topic.id].isCorrect
-                      ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800'
-                      : 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800'
-                    : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-primary/50 hover:text-primary dark:hover:text-blue-400'
-              }`}
-            >
-              {topic.id}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Content */}
+            {/* Main Content */}
       <main className="container mx-auto max-w-4xl px-4 mt-3 relative z-20">
         {filteredTopics.length === 0 ? (
           <motion.div 
